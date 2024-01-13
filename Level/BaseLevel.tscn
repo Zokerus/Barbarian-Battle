@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccb8iyxr4pa10"]
+[gd_scene load_steps=5 format=3 uid="uid://ccb8iyxr4pa10"]
+
+[ext_resource type="MeshLibrary" uid="uid://bhsh3wg4al11y" path="res://MeshLibraries/SpaceLibrary.meshlib" id="1_udew2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nqkeg"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -28,3 +30,6 @@ size = Vector3(100, 2, 100)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 14.5, 9.5)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_udew2")
