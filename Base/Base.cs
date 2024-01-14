@@ -8,17 +8,31 @@ public partial class Base : Node3D
     public int max_health = 5;
 
     private Label3D m_label;
+    private int m_health;
+
+    private int health
+    {
+        get { return m_health; }
+        set
+        {
+            m_health = value;
+            m_label.Text = m_health.ToString();
+            if (m_health < 1 )
+            {
+                GetTree().ReloadCurrentScene();
+            }
+        }
+    }
 
     public override void _Ready()
     {
         base._Ready();
         m_label = GetNode<Label3D>("Label3D");
-        m_label.Text = max_health.ToString();
+        health = max_health;
     }
 
     public void TakeDamage()
     {
-        max_health -= 1;
-        m_label.Text = max_health.ToString();
+        health -= 1;
     }
 }
