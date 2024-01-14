@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 public partial class Base : Node3D
 {
-    [Export]
+     [Export]
     public int max_health = 5;
 
     private Label3D m_label;
@@ -16,7 +16,11 @@ public partial class Base : Node3D
         set
         {
             m_health = value;
-            m_label.Text = m_health.ToString();
+            m_label.Text = m_health.ToString() + "/" + max_health.ToString();
+            //m_label.Modulate = Color.Color8(255, (byte)(255 * m_health / max_health), (byte)(255 * m_health / max_health));
+            Color red = Colors.Red;
+            Color white = Colors.White;
+            m_label.Modulate = red.Lerp(white, (float)health / (float)max_health);
             if (m_health < 1 )
             {
                 GetTree().ReloadCurrentScene();
