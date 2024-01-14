@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class Ray_Picker_Camera : Camera3D
 {
@@ -17,5 +18,27 @@ public partial class Ray_Picker_Camera : Camera3D
 		Vector2 mousePos = GetViewport().GetMousePosition();
 		m_rayCast.TargetPosition = this.ProjectLocalRayNormal(mousePos) * 100.0f; ;
 		m_rayCast.ForceRaycastUpdate();
+        
+        if (m_rayCast.IsColliding()) 
+		{
+			Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
+			GodotObject collider = m_rayCast.GetCollider();
+			if (collider is GridMap gridMap)
+			{
+				if(Input.IsActionPressed("click"))
+				{
+					Vector3 collisionPoint = m_rayCast.GetCollisionPoint();
+					Vector3I cell = gridMap.LocalToMap(collisionPoint);
+					if (gridMap.GetCellItem(cell) >= 0)
+					{
+						gridMap.SetCellItem(cell, 1);
+					}
+				}
+            }
+		}
+		else
+		{
+            Input.SetDefaultCursorShape(Input.CursorShape.Arrow);
+        }
 	}
 }
