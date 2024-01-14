@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 public partial class Ray_Picker_Camera : Camera3D
 {
+	[Export]
+	public TurretManager turretMananger;
+
 	private RayCast3D m_rayCast;
 
 	// Called when the node enters the scene tree for the first time.
@@ -32,6 +35,7 @@ public partial class Ray_Picker_Camera : Camera3D
 					if (gridMap.GetCellItem(cell) >= 0)
 					{
 						gridMap.SetCellItem(cell, 1);
+						turretMananger.BuildTurret(gridMap.MapToLocal(cell));
 					}
 				}
             }

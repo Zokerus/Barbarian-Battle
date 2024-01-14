@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1usdcsmyjsuo"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pftuy"]
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_i3shu"]
+top_radius = 0.6
+bottom_radius = 0.6
+height = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_pfup7"]
+size = Vector3(0.7, 0.3, 0.3)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wd330"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.5
+
+[node name="Turret" type="Node3D"]
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_pftuy")
+
+[node name="Top" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("CylinderMesh_i3shu")
+
+[node name="Visor" type="MeshInstance3D" parent="Base/Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.566155)
+mesh = SubResource("BoxMesh_pfup7")
+
+[node name="Barrel" type="MeshInstance3D" parent="Base/Top/Visor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.197984)
+mesh = SubResource("CylinderMesh_wd330")
