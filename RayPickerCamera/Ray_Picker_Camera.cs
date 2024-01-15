@@ -32,7 +32,7 @@ public partial class Ray_Picker_Camera : Camera3D
 				{
 					Vector3 collisionPoint = m_rayCast.GetCollisionPoint();
 					Vector3I cell = gridMap.LocalToMap(collisionPoint);
-					if (gridMap.GetCellItem(cell) >= 0)
+					if (gridMap.GetCellItem(cell) == 0)
 					{
 						gridMap.SetCellItem(cell, 1);
 						turretMananger.BuildTurret(gridMap.MapToLocal(cell));
