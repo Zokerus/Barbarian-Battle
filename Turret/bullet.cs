@@ -1,12 +1,13 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class bullet : Area3D
 {
 	[Export]
 	public float speed = 30.0f;
 
-	private Vector3 direction = Vector3.Forward;
+	public Vector3 direction = Vector3.Forward;
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
@@ -18,4 +19,14 @@ public partial class bullet : Area3D
 	{
 		this.QueueFree();
 	}
+
+    public void OnAreaEntered(Area3D area)
+    {
+		if (area.IsInGroup("enemy_area"))
+		{
+			Enemy enemy = area.GetParent<Enemy>();
+			enemy.health = enemy.health - 25;
+			QueueFree();
+		}
+    }
 }
