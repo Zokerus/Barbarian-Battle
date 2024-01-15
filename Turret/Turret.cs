@@ -23,7 +23,11 @@ public partial class Turret : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		var enemy = m_enemyPath.GetChildren()[^1]; //getting the last item of the array
+		Node pathObject = m_enemyPath.GetChildren()[^1]; //getting the last item of the array
+		if (pathObject is Enemy enemy) 
+		{
+			this.LookAt(enemy.GlobalPosition, Vector3.Up, true);
+		}
 	}
 
 	public void OnTimerTimeOut()
