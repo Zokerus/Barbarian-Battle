@@ -13,7 +13,8 @@ public partial class Turret : Node3D
 	public Path3D m_enemyPath;
 
 	private Timer timer;
-	private MeshInstance3D turretTop;
+	private Node3D cannon;
+	private Node3D cannonPivot;
 	private Enemy target;
 	private AnimationPlayer m_animationPlayer;
 
@@ -21,8 +22,9 @@ public partial class Turret : Node3D
 	public override void _Ready()
 	{
 		timer = GetNode<Timer>("Timer");
-		turretTop = GetNode<MeshInstance3D>("Base/Top");
-		m_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		cannon = GetNode<Node3D>("Base/CannonPivot/Cannon");
+        cannonPivot = GetNode<Node3D>("Base/CannonPivot");
+        m_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,7 +33,7 @@ public partial class Turret : Node3D
 		target = FindBestTarget();
 		if(target != null)
 		{
-			this.LookAt(target.GlobalPosition, Vector3.Up, true);
+			cannonPivot.LookAt(target.GlobalPosition, Vector3.Up, true);
 		}
 	}
 
@@ -40,8 +42,8 @@ public partial class Turret : Node3D
 		if(target != null)
 		{ 
 			bullet new_bullet = bullet.Instantiate<bullet>();
-			turretTop.AddChild(new_bullet);
-			new_bullet.direction = this.GlobalTransform.Basis.Z;
+			cannon.AddChild(new_bullet);
+			new_bullet.direction = cannon.GlobalTransform.Basis.Z;
 			m_animationPlayer.Play("Shoot");
 		}
 	}

@@ -1,88 +1,65 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1usdcsmyjsuo"]
+[gd_scene load_steps=8 format=3 uid="uid://b1usdcsmyjsuo"]
 
 [ext_resource type="Script" path="res://Turret/Turret.cs" id="1_1r3jb"]
 [ext_resource type="PackedScene" uid="uid://jixjjfjsqge3" path="res://Turret/bullet.tscn" id="1_secff"]
+[ext_resource type="PackedScene" uid="uid://2kdxyhlddg44" path="res://Assets/TurretBase.glb" id="3_ndfgd"]
+[ext_resource type="PackedScene" uid="uid://ch57mq8rsx8cl" path="res://Assets/Cannon.glb" id="4_v4acr"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_pftuy"]
-height = 1.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_i3shu"]
-top_radius = 0.6
-bottom_radius = 0.6
-height = 0.6
-
-[sub_resource type="BoxMesh" id="BoxMesh_pfup7"]
-size = Vector3(0.7, 0.3, 0.3)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_wd330"]
-top_radius = 0.05
-bottom_radius = 0.05
-height = 0.5
-
-[sub_resource type="Animation" id="Animation_y3ihu"]
+[sub_resource type="Animation" id="Animation_vpfx2"]
 resource_name = "Shoot"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Base/Top/Visor/Barrel:position")
+tracks/0/path = NodePath("Base/CannonPivot/Cannon:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0.05), Vector3(0, 0, 0.2)]
+"values": [Vector3(0, 2.1, 0), Vector3(0, 2.1, -0.6), Vector3(0, 2.1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ae8qv"]
+[sub_resource type="Animation" id="Animation_nyt3w"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Base/Top/Visor/Barrel:position")
+tracks/0/path = NodePath("Base/CannonPivot/Cannon:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0.2)]
+"values": [Vector3(0, 2.1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rrkpi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mhcy7"]
 _data = {
-"RESET": SubResource("Animation_ae8qv"),
-"Shoot": SubResource("Animation_y3ihu")
+"RESET": SubResource("Animation_nyt3w"),
+"Shoot": SubResource("Animation_vpfx2")
 }
 
 [node name="Turret" type="Node3D"]
 script = ExtResource("1_1r3jb")
 bullet = ExtResource("1_secff")
 
-[node name="Base" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("CylinderMesh_pftuy")
-
-[node name="Top" type="MeshInstance3D" parent="Base"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-mesh = SubResource("CylinderMesh_i3shu")
-
-[node name="Visor" type="MeshInstance3D" parent="Base/Top"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
-mesh = SubResource("BoxMesh_pfup7")
-
-[node name="Barrel" type="MeshInstance3D" parent="Base/Top/Visor"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.2)
-mesh = SubResource("CylinderMesh_wd330")
-
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="Base" parent="." instance=ExtResource("3_ndfgd")]
+
+[node name="CannonPivot" type="Node3D" parent="Base"]
+
+[node name="Cannon" parent="Base/CannonPivot" instance=ExtResource("4_v4acr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_rrkpi")
+"": SubResource("AnimationLibrary_mhcy7")
 }
 
 [connection signal="timeout" from="Timer" to="." method="OnTimerTimeOut"]
