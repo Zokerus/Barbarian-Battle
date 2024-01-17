@@ -9,7 +9,7 @@ public partial class EnemyPath : Path3D
 	[Export]
 	public DifficultyManager difficultyManager;
 	[Export]
-	public CanvasLayer victoryLayer;
+	public VictoryLayer victoryLayer;
 
 	private Timer m_spawnTimer;
 
@@ -49,7 +49,7 @@ public partial class EnemyPath : Path3D
 					return;
 				}
 			}
-			victoryLayer.Show();
+			victoryLayer.Victory();
 		}
 	}
 }

@@ -10,7 +10,7 @@ public partial class Base : Node3D
     private Label3D m_label;
     private int m_health;
 
-    private int health
+    public int health
     {
         get { return m_health; }
         set

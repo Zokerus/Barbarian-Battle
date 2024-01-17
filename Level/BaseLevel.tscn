@@ -137,6 +137,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("8_oful4")
+startingGold = 15000
 
 [node name="GoldLabel" type="Label" parent="GUI/Bank"]
 layout_mode = 2
@@ -148,6 +149,7 @@ label_settings = SubResource("LabelSettings_c5hae")
 [node name="DifficultyManager" parent="." instance=ExtResource("9_c4k1o")]
 
 [node name="VictoryLayer" parent="." instance=ExtResource("10_750so")]
+visible = false
 
 [connection signal="timeout" from="EnemyPath/SpawnTimer" to="EnemyPath" method="SpawnEnemy"]
 [connection signal="StopSpawningEnemies" from="DifficultyManager" to="EnemyPath" method="StopSpawnEnemies"]
