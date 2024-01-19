@@ -4,18 +4,19 @@
 
 [sub_resource type="Curve" id="Curve_nrota"]
 min_value = 0.25
-max_value = 2.0
-_data = [Vector2(0, 2), 0.0, -1.75, 0, 1, Vector2(1, 0.25), -1.75, 0.0, 1, 0]
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, 0.173366, 0, 0, Vector2(1, 0.25), -6.83191, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_p2fna"]
 min_value = 10.0
 max_value = 150.0
-_data = [Vector2(0, 10), 0.0, 140.0, 0, 1, Vector2(1, 150), 140.0, 0.0, 1, 0]
+_data = [Vector2(0, 40), 0.0, 110.0, 0, 1, Vector2(1, 150), 110.0, 0.0, 1, 0]
 point_count = 2
 
 [node name="DifficultyManager" type="Node"]
 script = ExtResource("1_lphve")
+gameLength = 180.0
 spawnTimeCurve = SubResource("Curve_nrota")
 enemyHealthCurve = SubResource("Curve_p2fna")
 

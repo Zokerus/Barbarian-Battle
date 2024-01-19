@@ -6,6 +6,8 @@ public partial class bullet : Area3D
 {
 	[Export]
 	public float speed = 30.0f;
+	[Export]
+	public int damage = 25;
 
 	public Vector3 direction = Vector3.Forward;
 
@@ -25,7 +27,7 @@ public partial class bullet : Area3D
 		if (area.IsInGroup("enemy_area"))
 		{
 			Enemy enemy = area.GetParent<Enemy>();
-			enemy.health = enemy.health - 25;
+			enemy.health = enemy.health - damage;
 			QueueFree();
 		}
     }

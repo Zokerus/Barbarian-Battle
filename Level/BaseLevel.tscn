@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccb8iyxr4pa10"]
+[gd_scene load_steps=20 format=3 uid="uid://ccb8iyxr4pa10"]
 
 [ext_resource type="PackedScene" uid="uid://dweqbmvhgl365" path="res://RayPickerCamera/Ray_Picker_Camera.tscn" id="1_p65i3"]
 [ext_resource type="MeshLibrary" uid="uid://bhsh3wg4al11y" path="res://MeshLibraries/SpaceLibrary.meshlib" id="1_udew2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c6w3tuxpy3dpj" path="res://Base/Base.tscn" id="3_wqlqx"]
 [ext_resource type="Script" path="res://Level/TurretManager.cs" id="5_8fucc"]
 [ext_resource type="PackedScene" uid="uid://b1usdcsmyjsuo" path="res://Turret/Turret.tscn" id="6_awh5q"]
+[ext_resource type="FontFile" uid="uid://drjs4vic7jeko" path="res://Assets/Asap-Bold.ttf" id="8_nddfg"]
 [ext_resource type="Script" path="res://Level/Bank.cs" id="8_oful4"]
 [ext_resource type="PackedScene" uid="uid://7y86pblfpmkm" path="res://DifficultyManager/DifficultyManager.tscn" id="9_c4k1o"]
 [ext_resource type="PackedScene" uid="uid://dphepb1y54gj8" path="res://UI/VictoryLayer.tscn" id="10_750so"]
@@ -36,6 +37,9 @@ point_count = 5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fupt8"]
 albedo_color = Color(0.294118, 0.294118, 0.294118, 1)
+
+[sub_resource type="Theme" id="Theme_qcvj8"]
+default_font = ExtResource("8_nddfg")
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5hae"]
 font_size = 64
@@ -120,7 +124,6 @@ autostart = true
 
 [node name="Base" parent="." instance=ExtResource("3_wqlqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
-max_health = 50
 
 [node name="TurretManager" type="Node3D" parent="." node_paths=PackedStringArray("enemyPath")]
 script = ExtResource("5_8fucc")
@@ -136,12 +139,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_qcvj8")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("8_oful4")
-startingGold = 15000
 
 [node name="GoldLabel" type="Label" parent="GUI/Bank"]
 layout_mode = 2

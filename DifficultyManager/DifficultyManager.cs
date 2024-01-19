@@ -20,6 +20,7 @@ public partial class DifficultyManager : Node
 	{
 		m_timer = GetNode<Timer>("Timer");
 		m_timer.Start(gameLength);
+		Engine.TimeScale = 5;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

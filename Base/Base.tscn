@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6w3tuxpy3dpj"]
+[gd_scene load_steps=4 format=3 uid="uid://c6w3tuxpy3dpj"]
 
 [ext_resource type="Script" path="res://Base/Base.cs" id="1_uitf5"]
 [ext_resource type="PackedScene" uid="uid://cmmtgua2eam5q" path="res://Assets/Base.glb" id="2_3cm3j"]
+[ext_resource type="FontFile" uid="uid://drjs4vic7jeko" path="res://Assets/Asap-Bold.ttf" id="2_esw3d"]
 
 [node name="Base" type="Node3D" groups=["base"]]
 script = ExtResource("1_uitf5")
@@ -11,6 +12,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 billboard = 1
 text = "0
 "
+font = ExtResource("2_esw3d")
 font_size = 500
 outline_size = 100
 
